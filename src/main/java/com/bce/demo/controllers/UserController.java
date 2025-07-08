@@ -2,6 +2,7 @@ package com.bce.demo.controllers;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bce.demo.dto.UserDto;
 import com.bce.demo.entities.User;
 import com.bce.demo.services.UserService;
 
@@ -30,6 +32,14 @@ public class UserController {
     public String sayHello() {
         return "Hola Mundo";
     }
+
+    @GetMapping("/user/{id}")
+    public UserDto getUser(@PathVariable("id") Integer id){
+        ModelMapper modelMapper = new ModelMapper();
+        User userDb = userService.getUserById(id);
+        return modelMapper.map(userDb, UserDto.class);
+    }
+
 
     @GetMapping("")
     public List<User> getAll() {
