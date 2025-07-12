@@ -19,8 +19,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String address;
-    private String phone;
+    private String nombre;
+    private String direccion;
+    private String telefono;
 
 }
